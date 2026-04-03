@@ -1,0 +1,241 @@
+/* ===== CSS Variables ===== */
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --danger: #ef4444;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --over-limit: #fef2f2;
+  --over-limit-border: #ef4444;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #111827;
+  --surface: #1f2937;
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --danger: #f87171;
+  --text: #f9fafb;
+  --text-muted: #9ca3af;
+  --border: #374151;
+  --over-limit: #3b1f1f;
+  --over-limit-border: #f87171;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ===== Header ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+header h1 { font-size: 1.4rem; }
+
+#themeToggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+/* ===== Balance Card ===== */
+.balance-card {
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: background 0.3s, border 0.3s;
+}
+
+.balance-card.over-limit {
+  background: var(--over-limit);
+  border: 2px solid var(--over-limit-border);
+  color: var(--text);
+}
+
+.balance-label { font-size: 0.85rem; opacity: 0.85; margin-bottom: 4px; }
+
+.balance-card h2 { font-size: 2rem; margin-bottom: 12px; }
+
+.limit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.limit-row input {
+  width: 130px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.2);
+  color: inherit;
+  font-size: 0.85rem;
+}
+
+.balance-card.over-limit .limit-row input {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.limit-row button {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,0.25);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.limit-row button:hover { background: rgba(255,255,255,0.4); }
+
+/* ===== Form ===== */
+#expenseForm h3, #listSection h3, #chartSection h3 {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.form-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+input[type="text"], input[type="number"], select {
+  flex: 1;
+  min-width: 100px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+button[type="submit"], #addCategoryBtn, #setLimitBtn {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[type="submit"] { width: 100%; margin-top: 4px; }
+
+button[type="submit"]:hover, #addCategoryBtn:hover, #setLimitBtn:hover {
+  background: var(--primary-hover);
+}
+
+.error { color: var(--danger); font-size: 0.82rem; margin-bottom: 6px; min-height: 16px; }
+
+/* ===== Controls ===== */
+.controls { padding: 10px 16px; }
+.controls label { font-size: 0.88rem; color: var(--text-muted); }
+.controls select { max-width: 180px; padding: 6px 10px; }
+
+/* ===== Main Content ===== */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .main-content { grid-template-columns: 1fr; }
+}
+
+/* ===== Transaction List ===== */
+#transactionList {
+  list-style: none;
+  max-height: 360px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#transactionList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+  gap: 8px;
+}
+
+.tx-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.tx-name { font-weight: 600; }
+.tx-meta { color: var(--text-muted); font-size: 0.78rem; }
+.tx-amount { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.delete-btn:hover { background: var(--over-limit); }
+
+.empty { color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 16px 0; }
+
+/* ===== Chart ===== */
+#chartSection { display: flex; flex-direction: column; align-items: center; }
+#pieChart { max-width: 220px; max-height: 220px; }

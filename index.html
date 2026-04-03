@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>💰 Expense Tracker</h1>
+      <button id="themeToggle" title="Toggle dark/light mode">🌙</button>
+    </header>
+
+    <!-- Total Balance -->
+    <div class="balance-card" id="balanceCard">
+      <p class="balance-label">Total Spent</p>
+      <h2 id="totalBalance">Rp 0</h2>
+      <div class="limit-row">
+        <label for="limitInput">Spending Limit:</label>
+        <input type="number" id="limitInput" placeholder="Set limit..." min="0" />
+        <button id="setLimitBtn">Set</button>
+      </div>
+    </div>
+
+    <!-- Input Form -->
+    <form id="expenseForm" class="card">
+      <h3>Add Transaction</h3>
+      <div class="form-group">
+        <input type="text" id="itemName" placeholder="Item Name" />
+        <input type="number" id="itemAmount" placeholder="Amount (Rp)" min="1" />
+      </div>
+      <div class="form-group">
+        <select id="itemCategory">
+          <option value="">-- Category --</option>
+          <option value="Food">🍔 Food</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Fun">🎮 Fun</option>
+        </select>
+        <input type="text" id="customCategory" placeholder="Or add new category..." />
+        <button type="button" id="addCategoryBtn">+ Add</button>
+      </div>
+      <p id="formError" class="error"></p>
+      <button type="submit">Add Transaction</button>
+    </form>
+
+    <!-- Controls -->
+    <div class="controls card">
+      <label>Sort by:
+        <select id="sortSelect">
+          <option value="default">Default</option>
+          <option value="amount-asc">Amount ↑</option>
+          <option value="amount-desc">Amount ↓</option>
+          <option value="category">Category A-Z</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Main content: list + chart -->
+    <div class="main-content">
+      <div class="card" id="listSection">
+        <h3>Transactions</h3>
+        <ul id="transactionList"></ul>
+        <p id="emptyMsg" class="empty">No transactions yet.</p>
+      </div>
+
+      <div class="card" id="chartSection">
+        <h3>Spending by Category</h3>
+        <canvas id="pieChart"></canvas>
+        <p id="chartEmpty" class="empty">Add transactions to see chart.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
